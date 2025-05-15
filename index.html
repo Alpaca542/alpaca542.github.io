@@ -2,135 +2,378 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Инструкция по метчингу в Ethos</title>
+        <style>
+            :root {
+                --primary-color: #3498db;
+                --heading-dark: #2c3e50;
+                --heading-light: #34495e;
+                --accent-color: #e74c3c;
+                --success-color: #27ae60;
+                --warning-color: #f39c12;
+                --background: #f9f9f9;
+                --card-bg: #ffffff;
+                --text-color: #333333;
+                --border-radius: 8px;
+                --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                --transition: all 0.3s ease;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Segoe UI", Arial, sans-serif;
+                line-height: 1.6;
+                background-color: var(--background);
+                color: var(--text-color);
+                padding: 20px;
+            }
+
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                background-color: var(--card-bg);
+                padding: 40px;
+                border-radius: var(--border-radius);
+                box-shadow: var(--box-shadow);
+            }
+
+            h1 {
+                color: var(--heading-dark);
+                margin-bottom: 30px;
+                padding-bottom: 15px;
+                border-bottom: 2px solid var(--primary-color);
+                font-size: 2.2em;
+            }
+
+            h2 {
+                color: var(--heading-light);
+                margin-top: 30px;
+                margin-bottom: 15px;
+                font-size: 1.8em;
+                padding-left: 10px;
+                border-left: 5px solid var(--primary-color);
+            }
+
+            h3 {
+                color: var(--heading-dark);
+                margin-top: 25px;
+                margin-bottom: 12px;
+                font-size: 1.4em;
+                display: flex;
+                align-items: center;
+            }
+
+            h3::before {
+                content: "•";
+                color: var(--primary-color);
+                margin-right: 10px;
+                font-size: 1.5em;
+            }
+
+            p {
+                margin-bottom: 15px;
+                line-height: 1.7;
+            }
+
+            ul,
+            ol {
+                margin: 15px 0 20px 20px;
+            }
+
+            li {
+                margin-bottom: 8px;
+                position: relative;
+            }
+
+            strong {
+                color: var(--heading-dark);
+                font-weight: 600;
+            }
+
+            em {
+                color: var(--primary-color);
+                font-style: italic;
+            }
+
+            .highlight {
+                background-color: rgba(52, 152, 219, 0.1);
+                padding: 15px;
+                border-left: 4px solid var(--primary-color);
+                border-radius: 0 var(--border-radius) var(--border-radius) 0;
+                margin: 20px 0;
+            }
+
+            .button {
+                display: inline-block;
+                background-color: var(--primary-color);
+                color: white;
+                padding: 3px 8px;
+                border-radius: 4px;
+                font-size: 0.9em;
+                font-weight: bold;
+            }
+
+            .action-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+                background-color: #f1f1f1;
+                border-radius: 50%;
+                font-style: normal;
+                color: var(--accent-color);
+            }
+
+            .workflow-steps ol {
+                counter-reset: workflow-counter;
+                list-style-type: none;
+                margin-left: 0;
+            }
+
+            .workflow-steps ol li {
+                counter-increment: workflow-counter;
+                position: relative;
+                padding: 12px 0 12px 45px;
+                margin-bottom: 16px;
+                border-left: 2px solid var(--primary-color);
+            }
+
+            .workflow-steps ol li::before {
+                content: counter(workflow-counter);
+                background-color: var(--primary-color);
+                color: white;
+                font-weight: bold;
+                position: absolute;
+                left: -15px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .workflow-steps ol li:last-child {
+                border-left: 2px solid transparent;
+            }
+
+            .tab-name {
+                background-color: #e3f2fd;
+                color: var(--primary-color);
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-weight: 500;
+            }
+
+            .instructions-container {
+                border: 1px solid #e0e0e0;
+                border-radius: var(--border-radius);
+                padding: 20px;
+                background-color: #fafafa;
+                margin: 20px 0;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+
+            .footer {
+                margin-top: 40px;
+                padding-top: 20px;
+                border-top: 1px solid #e0e0e0;
+                color: #777;
+                font-size: 0.9em;
+                text-align: center;
+            }
+
+            .footer p {
+                margin: 5px 0;
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    padding: 20px;
+                }
+
+                h1 {
+                    font-size: 1.8em;
+                }
+
+                h2 {
+                    font-size: 1.5em;
+                }
+
+                h3 {
+                    font-size: 1.2em;
+                }
+
+                .workflow-steps ol li {
+                    padding-left: 35px;
+                }
+            }
+        </style>
     </head>
-    <body
-        style="
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            padding: 40px;
-            max-width: 800px;
-            margin: auto;
-            background-color: #fff;
-            color: #333;
-        "
-    >
-        <h1 style="color: #2c3e50">
-            Как пользоваться интерфейсом сопоставления вакансий в Ethos
-        </h1>
+    <body>
+        <div class="container">
+            <h1>Как пользоваться интерфейсом сопоставления вакансий в Ethos</h1>
 
-        <h2 style="color: #34495e">С чего начать</h2>
-        <p>
-            <strong>Вход в приложение:</strong> при первом запуске просто
-            введите пароль. Делиться им нельзя — в приложении содержатся
-            персональные данные подопечных и доступ к Google API.
-        </p>
-        <p>
-            <strong>Открываем вкладку Matching:</strong> в верхней части экрана
-            есть три вкладки — <em>People</em>, <em>Jobs</em> и
-            <em>Matching</em>. Кликаем на <strong>Matching</strong>, чтобы
-            начать сопоставление.
-        </p>
+            <h2>С чего начать</h2>
+            <p>
+                <strong>Вход в приложение:</strong> при первом запуске просто
+                введите пароль. Делиться им нельзя — в приложении содержатся
+                персональные данные подопечных и доступ к Google API.
+            </p>
+            <p>
+                <strong>Открываем вкладку Matching:</strong> в верхней части
+                экрана есть три вкладки — <span class="tab-name">People</span>,
+                <span class="tab-name">Jobs</span> и
+                <span class="tab-name">Matching</span>. Кликаем на
+                <span class="tab-name">Matching</span>, чтобы начать
+                сопоставление.
+            </p>
 
-        <h2 style="color: #34495e">Структура интерфейса Matching</h2>
-        <ul>
-            <li><strong>Левая панель:</strong> список подопечных</li>
-            <li><strong>Правая панель:</strong> подходящие вакансии</li>
-            <li><strong>Нижняя панель:</strong> редактор письма</li>
-        </ul>
+            <h2>Структура интерфейса Matching</h2>
+            <ul>
+                <li><strong>Левая панель:</strong> список подопечных</li>
+                <li><strong>Правая панель:</strong> подходящие вакансии</li>
+                <li><strong>Нижняя панель:</strong> редактор письма</li>
+            </ul>
 
-        <h2 style="color: #34495e">Интерфейс People (Люди)</h2>
-        <ul>
-            <li><strong>Центр:</strong> карточки пользователей</li>
-            <li><strong>Слева:</strong> добавление нового подопечного</li>
-        </ul>
+            <h2>Интерфейс People (Люди)</h2>
+            <ul>
+                <li><strong>Центр:</strong> карточки пользователей</li>
+                <li><strong>Слева:</strong> добавление нового подопечного</li>
+            </ul>
 
-        <h2 style="color: #34495e">Интерфейс Jobs (Вакансии)</h2>
-        <ul>
-            <li><strong>Центр:</strong> карточки вакансий</li>
-            <li>
-                <strong>Слева:</strong> добавление вручную и фетчинг с сайтов
-            </li>
-        </ul>
-        <p>
-            <strong>Важно:</strong> фетчинг занимает от 5 мин до 2 часов и
-            требует серверных ресурсов. Не злоупотребляйте.
-        </p>
+            <h2>Интерфейс Jobs (Вакансии)</h2>
+            <ul>
+                <li><strong>Центр:</strong> карточки вакансий</li>
+                <li>
+                    <strong>Слева:</strong> добавление вручную и фетчинг с
+                    сайтов
+                </li>
+            </ul>
+            <div class="highlight">
+                <strong>Важно:</strong> фетчинг занимает от 5 мин до 2 часов и
+                требует серверных ресурсов. Не злоупотребляйте.
+            </div>
 
-        <h2 style="color: #34495e">Пошаговая инструкция</h2>
+            <h2>Пошаговая инструкция</h2>
 
-        <h3 style="color: #2c3e50">1. Выбор пользователя</h3>
-        <p>На левой панели выберите подопечного. Доступные действия:</p>
-        <ul>
-            <li><strong>View</strong> — посмотреть информацию</li>
-            <li><strong>Match</strong> — выбрать для сопоставления</li>
-        </ul>
-        <p>
-            Выбранный пользователь будет выделен синей рамкой и помечен как
-            <em>Selected</em>.
-        </p>
+            <div class="instructions-container">
+                <h3>1. Выбор пользователя</h3>
+                <p>На левой панели выберите подопечного. Доступные действия:</p>
+                <ul>
+                    <li>
+                        <span class="button">View</span> — посмотреть информацию
+                    </li>
+                    <li>
+                        <span class="button">Match</span> — выбрать для
+                        сопоставления
+                    </li>
+                </ul>
+                <p>
+                    Выбранный пользователь будет выделен синей рамкой и помечен
+                    как
+                    <em>Selected</em>.
+                </p>
 
-        <h3 style="color: #2c3e50">2. Просмотр подходящих вакансий</h3>
-        <p>
-            Справа появятся вакансии, отсортированные по совпадению. В каждой
-            карточке:
-        </p>
-        <ul>
-            <li><strong>View</strong> — детали вакансии</li>
-            <li><strong>Use</strong> — добавить в письмо</li>
-            <li><strong>Copy</strong> — скопировать в буфер</li>
-        </ul>
+                <h3>2. Просмотр подходящих вакансий</h3>
+                <p>
+                    Справа появятся вакансии, отсортированные по совпадению. В
+                    каждой карточке:
+                </p>
+                <ul>
+                    <li><span class="button">View</span> — детали вакансии</li>
+                    <li><span class="button">Use</span> — добавить в письмо</li>
+                    <li>
+                        <span class="button">Copy</span> — скопировать в буфер
+                    </li>
+                </ul>
 
-        <h3 style="color: #2c3e50">3. Составление и отправка письма</h3>
-        <p>Нижняя панель — это редактор. Разверните его стрелкой вверх.</p>
-        <ul>
-            <li><strong>Compose:</strong> создание письма</li>
-            <li><strong>Sent Emails:</strong> история отправки</li>
-        </ul>
-        <p>Во вкладке <strong>Compose</strong> можно:</p>
-        <ul>
-            <li>редактировать вступление и завершение письма</li>
-            <li>удалять вакансии (иконка корзины)</li>
-            <li>нажать <strong>Save Changes</strong> — сохранить черновик</li>
-            <li><strong>Copy Email</strong> — скопировать письмо</li>
-            <li>
-                <strong>Mark Sent</strong> — отправить письмо (если в нём есть
-                хотя бы одна вакансия)
-            </li>
-        </ul>
+                <h3>3. Составление и отправка письма</h3>
+                <p>
+                    Нижняя панель — это редактор. Разверните его стрелкой вверх.
+                </p>
+                <ul>
+                    <li><strong>Compose:</strong> создание письма</li>
+                    <li><strong>Sent Emails:</strong> история отправки</li>
+                </ul>
+                <p>Во вкладке <strong>Compose</strong> можно:</p>
+                <ul>
+                    <li>редактировать вступление и завершение письма</li>
+                    <li>удалять вакансии (иконка корзины)</li>
+                    <li>
+                        нажать <span class="button">Save Changes</span> —
+                        сохранить черновик
+                    </li>
+                    <li>
+                        <span class="button">Copy Email</span> — скопировать
+                        письмо
+                    </li>
+                    <li>
+                        <span class="button">Mark Sent</span> — отправить письмо
+                        (если в нём есть хотя бы одна вакансия)
+                    </li>
+                </ul>
 
-        <h3 style="color: #2c3e50">4. Управление вакансиями в письме</h3>
-        <ul>
-            <li>
-                <strong>Добавить:</strong> нажмите <em>Use</em> на нужной
-                вакансии
-            </li>
-            <li>
-                <strong>Удалить:</strong> откройте редактор, нажмите на корзину
-                возле нужной вакансии
-            </li>
-        </ul>
+                <h3>4. Управление вакансиями в письме</h3>
+                <ul>
+                    <li>
+                        <strong>Добавить:</strong> нажмите
+                        <span class="button">Use</span> на нужной вакансии
+                    </li>
+                    <li>
+                        <strong>Удалить:</strong> откройте редактор, нажмите на
+                        <i class="action-icon">🗑️</i>
+                        возле нужной вакансии
+                    </li>
+                </ul>
+            </div>
 
-        <h2 style="color: #34495e">Пример рабочего процесса</h2>
-        <ol>
-            <li>Добавьте подопечного во вкладке <strong>People</strong></li>
-            <li>Фетчите свежие вакансии во вкладке <strong>Jobs</strong></li>
-            <li>
-                Перейдите на <strong>Matching</strong>, выберите пользователя
-            </li>
-            <li>
-                Изучите подходящие вакансии, нажимайте <em>Use</em> на нужных
-            </li>
-            <li>Отредактируйте письмо при необходимости</li>
-            <li>
-                Нажмите <strong>Save Changes</strong> и
-                <strong>Copy Email</strong>
-            </li>
-            <li>Нажмите <strong>Mark Sent</strong> — письмо уйдёт в историю</li>
-            <li>
-                Посмотреть отправленные письма можно во вкладке
-                <em>Sent Emails</em>
-            </li>
-        </ol>
+            <h2>Пример рабочего процесса</h2>
+            <div class="workflow-steps">
+                <ol>
+                    <li>
+                        Добавьте подопечного во вкладке
+                        <span class="tab-name">People</span>
+                    </li>
+                    <li>
+                        Фетчите свежие вакансии во вкладке
+                        <span class="tab-name">Jobs</span>
+                    </li>
+                    <li>
+                        Перейдите на <span class="tab-name">Matching</span>,
+                        выберите пользователя
+                    </li>
+                    <li>
+                        Изучите подходящие вакансии, нажимайте
+                        <span class="button">Use</span> на нужных
+                    </li>
+                    <li>Отредактируйте письмо при необходимости</li>
+                    <li>
+                        Нажмите <span class="button">Save Changes</span> и
+                        <span class="button">Copy Email</span>
+                    </li>
+                    <li>
+                        Нажмите <span class="button">Mark Sent</span> — письмо
+                        уйдёт в историю
+                    </li>
+                    <li>
+                        Посмотреть отправленные письма можно во вкладке
+                        <span class="tab-name">Sent Emails</span>
+                    </li>
+                </ol>
+            </div>
+
+            <footer class="footer">
+                <p>Последнее обновление: 15 мая 2025 г.</p>
+                <p>© Ethos — Система сопоставления вакансий</p>
+            </footer>
+        </div>
     </body>
 </html>
